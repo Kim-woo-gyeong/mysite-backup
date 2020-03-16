@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="guestbook">
+	<select id="findAll" resultType="guestbookvo">
+		<![CDATA[
+			select no, name, contents, password, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate
+			from guestbook 
+			order by reg_date desc
+		]]>
+	</select>
+	
+	<select id="findAll2" parameterType="long" resultType="guestbookvo">
+		<![CDATA[
+			select no, name, contents, password, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate
+			from guestbook
+			<if test='no > 0'>
+				where no < #{no}
+			</if> 
+			order by reg_date desc
+			limit 0,3
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="guestbookvo">
+		<![CDATA[
+			insert into guestbook values(null, #{name }, #{contents }, #{password },sysdate())
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="guestbookvo">
+		<![CDATA[
+			delete from guestbook where no = #{no} and password = #{password}
+		]]>
+	</delete>
+</mapper>
