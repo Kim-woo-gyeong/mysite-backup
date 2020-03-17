@@ -61,7 +61,7 @@ public class UserController {
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(
 			@AuthUser UserVo authUser, Model model) {
-		System.out.println("update:"+authUser);
+
 //		UserVo authUser = (UserVo)session.getAttribute("authUser");
 //		if(authUser==null) {
 //			return "redirect:/";

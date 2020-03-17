@@ -28,12 +28,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		//3. Method의 @Auth 받아오기
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
-		System.out.println("auth:"+auth);
 		
 		//4. Method에 Auth가 없으면 - @auth x Type에 붙어 있는지 확인(과제)
 		if(auth == null) {
 			auth = handlerMethod.getMethod().getDeclaringClass().getAnnotation(Auth.class);
-			System.out.println("auth:"+auth);
 		}
 		
 		//5. 타입이나 메소드 둘아 @Auth가 적용이 안되어 잇는경우.
@@ -57,7 +55,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//6.권한 체크를 위해서 role 가져오기("USER","ADMIN")
 		String role = auth.value();
 		
-		System.out.println("role:"+role);
 		
 		//7. @Auth의 role이 "USER"인 경우에는  
 		//   authUser의 role이 "USER"나 "ADMIN"이든 상관이 없음. 무조건 true?

@@ -48,6 +48,7 @@
 	<context:annotation-config />
 	<context:component-scan
 		base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
+
 	<!-- ViewResolver 설정 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -57,6 +58,13 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="1" />
 	</bean>
-
-
+	
+	<!-- 멀티파트 리졸버 -->
+	<bean id="multipartResolver" 
+       class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <property name="maxUploadSize" value="52428800" />
+     <property name="defaultEncoding" value="utf-8" />
+	</bean>
+	<!-- mvc resources -->
+	<mvc:resources mapping="/images/**" location="file:/mysite-uploads/" />
 </beans>
