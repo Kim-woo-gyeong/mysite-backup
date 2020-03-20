@@ -10,7 +10,8 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+	<!-- auto proxy -->
+	<aop:aspectj-autoproxy/>
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
@@ -59,6 +60,15 @@
 		<property name="order" value="1" />
 	</bean>
 	
+	 <!--  MessageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	   <property name="basenames">
+	      <list>
+		<value>messages/messages_ko</value>
+	      </list>
+	   </property>
+	</bean>
+		
 	<!-- 멀티파트 리졸버 -->
 	<bean id="multipartResolver" 
        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
