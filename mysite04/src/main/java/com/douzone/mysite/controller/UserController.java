@@ -55,32 +55,10 @@ public class UserController {
 		return "user/login";
 	}
 	
-	/*
-	 * @RequestMapping(value="/login",method = RequestMethod.POST) public String
-	 * login(HttpSession session, @ModelAttribute UserVo vo) { UserVo authUser =
-	 * userService.getUser(vo); if(authUser==null) { return "user/login"; }
-	 * 
-	 * session.setAttribute("authUser",authUser); return "redirect:/"; }
-	 */
-	
-	/*
-	 * @RequestMapping(value="/logout") public String logout(HttpSession session) {
-	 * /////////////////////////접근제어코드//////////////////////// UserVo authUser =
-	 * (UserVo)session.getAttribute("authUser"); if(authUser==null) { return
-	 * "redirect:/"; } ////////////////////////////////////////////////////////////
-	 * session.removeAttribute("authUser"); session.invalidate(); return
-	 * "redirect:/"; }
-	 */
-	
 	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(
 			@AuthUser UserVo authUser, Model model) {
-
-//		UserVo authUser = (UserVo)session.getAttribute("authUser");
-//		if(authUser==null) {
-//			return "redirect:/";
-//		}
 		
 		Long no = authUser.getNo();
 		
@@ -104,9 +82,13 @@ public class UserController {
 		return "user/joinsuccess";
 	}
 	
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public void auth() {
+		
+	}
 	
-	/*
-	 * @ExceptionHandler(Exception.class) public String handleException() { return
-	 * "error/exception"; }
-	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logout() {
+		
+	}
 }
