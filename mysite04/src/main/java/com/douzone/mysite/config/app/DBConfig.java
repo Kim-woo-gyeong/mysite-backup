@@ -36,6 +36,7 @@ public class DBConfig {
 	
 	@Bean
 	//xml에는 transactionManager 설정 x, java config에서는 해줘야 DataSource를 잘 Mapping.
+	//자바가 인식 할 수 있도록 변환해줌.
 	public PlatformTransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
