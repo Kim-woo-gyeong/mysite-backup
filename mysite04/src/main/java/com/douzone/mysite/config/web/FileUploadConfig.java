@@ -30,6 +30,6 @@ public class FileUploadConfig extends WebMvcConfigurerAdapter {
 	//MVC Resources(URL Magic Mappling)
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping")).addResourceLocations("file:"+env.getProperty("/mysite-uploads"));
+		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping")).addResourceLocations("file:"+env.getProperty("fileupload.uploadLocation"));
 	}
 }

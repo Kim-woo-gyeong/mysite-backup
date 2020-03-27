@@ -26,8 +26,8 @@ public class WebConfig implements WebMvcConfigurer {
 	private Environment env;
 	
 	// Argument Resolver
-	@Bean
 	// argument resolver는 bean 객체기 때문에 container에서 먼저 생성해 주어야함.
+	@Bean
 	public HandlerMethodArgumentResolver authUserHandlerMethodArgumentResolver() {
 		return new AuthUserHandlerMethodArgumentResolver();
 	}
@@ -74,7 +74,7 @@ public class WebConfig implements WebMvcConfigurer {
 	//MVC Resources(URL Magic Mappling)
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping")).addResourceLocations("file:"+env.getProperty("/mysite-uploads"));
+		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping")).addResourceLocations("file:"+env.getProperty("fileupload.uploadLocation"));
 	}
 
 	
