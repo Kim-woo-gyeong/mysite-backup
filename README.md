@@ -18,6 +18,7 @@
 # Annotaion 정리
 
 @Component : class Bean으로 바꿀 때 필요.
+
 @ComponentScan : @Component를 Scan하는 것.
 
 WebMvcConfigurerAdapter 상속 받는 이유???
