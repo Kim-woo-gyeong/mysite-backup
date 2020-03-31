@@ -21,4 +21,5 @@
 @ComponentScan : @Component를 Scan하는 것.
 
 WebMvcConfigurerAdapter 상속 받는 이유???
-  Spring MVC 환경을 구성하는 클래스 들을
+  Spring MVC 환경을 구성하는 클래스 들을 등록!(예외처리, Valid 등..)
+   - Interceptors, Handler, @EnableWebMvc
