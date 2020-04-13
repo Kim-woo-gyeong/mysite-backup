@@ -11,41 +11,54 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- auto proxy -->
-	<aop:aspectj-autoproxy/>
+	<aop:aspectj-autoproxy />
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			   <property name="supportedMediaTypes">
+			       <list>
+			            <value>application/json; charset=UTF-8</value>
+			        </list>
+			   </property>
+			</bean>
+		</mvc:message-converters>
 		<mvc:argument-resolvers>
-			<bean class="com.douzone.security.AuthUserHandlerMethodArgumentResolver" />
+			<bean
+				class="com.douzone.security.AuthUserHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
-	
-	<!-- 	Interceptors -->
+
+	<!-- Interceptors -->
 	<mvc:interceptors>
-		<!-- 
+		<!-- <mvc:interceptor> <mvc:mapping path="/board/**"/> <bean class="com.douzone.mysite.interceptor.MyInterceptor02" 
+			/> </mvc:interceptor> -->
 		<mvc:interceptor>
-			<mvc:mapping path="/board/**"/>
-			<bean class="com.douzone.mysite.interceptor.MyInterceptor02" />
-		</mvc:interceptor>	
-		 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/user/auth"/>
+			<mvc:mapping path="/user/auth" />
 			<bean class="com.douzone.security.LoginInterceptor" />
-		</mvc:interceptor>	
+		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/logout"/>
+			<mvc:mapping path="/user/logout" />
 			<bean class="com.douzone.security.LogoutInterceptor" />
-		</mvc:interceptor>	
+		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/user/auth"/>
-			<mvc:exclude-mapping path="/user/logout"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/user/auth" />
+			<mvc:exclude-mapping path="/user/logout" />
+			<mvc:exclude-mapping path="/assets/**" />
 			<bean class="com.douzone.security.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+
 	<context:annotation-config />
 	<context:component-scan
 		base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
@@ -59,22 +72,24 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="1" />
 	</bean>
-	
-	 <!--  MessageSource -->
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-	   <property name="basenames">
-	      <list>
-		<value>messages/messages_ko</value>
-	      </list>
-	   </property>
+
+	<!-- MessageSource -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
 	</bean>
-		
+
 	<!-- 멀티파트 리졸버 -->
-	<bean id="multipartResolver" 
-       class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-      <property name="maxUploadSize" value="52428800" />
-     <property name="defaultEncoding" value="utf-8" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="52428800" />
+		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 	<!-- mvc resources -->
-	<mvc:resources mapping="/images/**" location="file:/mysite-uploads/" />
+	<mvc:resources mapping="/images/**"
+		location="file:/mysite-uploads/" />
 </beans>
