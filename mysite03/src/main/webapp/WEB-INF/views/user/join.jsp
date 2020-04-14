@@ -54,6 +54,7 @@
 			$('#img-checkemail').hide();
 			console.log("changed!");
 		})
+		
 		$('#btn-checkemail').click(function(){
 			var email = $("#email").val();
 			if(email==''){
