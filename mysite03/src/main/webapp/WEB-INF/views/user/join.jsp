@@ -71,7 +71,7 @@
 						console.error(response.message);
 						return;
 					}
-					if(response.result==true){
+					if(response.data==true){
 						alert('존재하는 이메일입니다.');
 						$('email').val('').focus();
 						return;
