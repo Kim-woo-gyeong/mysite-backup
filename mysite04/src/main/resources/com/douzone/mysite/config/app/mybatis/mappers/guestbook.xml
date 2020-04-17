@@ -9,7 +9,23 @@
 		]]>
 	</select>
 	
-	<select id="findAll2" parameterType="long" resultType="guestbookvo">
+	<select id="findAllByNo" parameterType="long" resultType="guestbookvo">
+		<![CDATA[
+			select no, name, contents, password, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate
+			from guestbook 
+		]]>
+		<if test="_parameter > 0">
+			<![CDATA[
+				where no <#{_parameter}
+			]]>	
+		</if>
+		<![CDATA[
+			order by no desc
+			limit 0, 3
+		]]>
+	</select>
+	
+<!-- 	<select id="findAll2" parameterType="long" resultType="guestbookvo">
 		<![CDATA[
 			select no, name, contents, password, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate
 			from guestbook
@@ -19,12 +35,15 @@
 			order by reg_date desc
 			limit 0,3
 		]]>
-	</select>
+	</select> -->
 	
 	<insert id="insert" parameterType="guestbookvo">
 		<![CDATA[
 			insert into guestbook values(null, #{name }, #{contents }, #{password },sysdate())
 		]]>
+		<selectKey keyProperty = "no" resultType="long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<delete id="delete" parameterType="guestbookvo">
