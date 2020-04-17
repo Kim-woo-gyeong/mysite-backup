@@ -9,7 +9,7 @@ import com.douzone.mysite.repository.GuestBookRepository;
 import com.douzone.mysite.vo.GuestBookVo;
 
 @Service
-public class GusetbookService {
+public class GuestbookService {
 
 	@Autowired
 	private GuestBookRepository bookRepository;
@@ -26,4 +26,17 @@ public class GusetbookService {
 		int result = bookRepository.delete(vo);
 		return result == 1;
 	}
+	
+	public boolean delete(Long no, String password) {
+		return 1 == bookRepository.delete(new GuestBookVo(no, password));
+	}
+
+	public List<GuestBookVo> getList(Long startNo) {
+		return bookRepository.findAll(startNo);
+	}
+
+	public int writeMessage(GuestBookVo vo) {
+		return bookRepository.insert(vo);
+	}
+
 }

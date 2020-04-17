@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.douzone.mysite.service.GusetbookService;
+import com.douzone.mysite.service.GuestbookService;
 import com.douzone.mysite.vo.GuestBookVo;
 
 @Controller
@@ -17,7 +17,7 @@ import com.douzone.mysite.vo.GuestBookVo;
 public class GuestbookController {
 	
 	@Autowired
-	private GusetbookService bookService;
+	private GuestbookService bookService;
 	
 	@RequestMapping("")
 	public String index(Model model) {
