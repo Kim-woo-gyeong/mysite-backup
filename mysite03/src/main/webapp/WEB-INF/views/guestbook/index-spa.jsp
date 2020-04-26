@@ -26,13 +26,13 @@ var listTemplate = new EJS({
 });
 
 var render = function(vo, mode){
-/* 	var html = 
+	var html = 
 		"<li data-no='" + vo.no + "'>" + 
 		"   <strong>" + vo.name + "</strong>" + 
 		"   <p>" + vo.contents.replace(/\n/gi, "<br>") + "</p>" + 
 		"   <strong></strong>" + 
 		"   <a href='' data-no='" + vo.no + "'>삭제</a>" +
-		"</li>"; */
+		"</li>";
 	
 /* 	if(mode){
 		$("#list-guestbook").prepend(html);
